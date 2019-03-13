@@ -9,10 +9,8 @@
 //-------------------------------------------------------------------------------------------------
 #include <iostream>
 #include <sstream>
-#include <tuple>
 #include <algorithm>
 #include <type_traits>
-
 #include <vector>
 #include <list>
 #include <map>
