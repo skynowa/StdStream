@@ -56,6 +56,22 @@
 
 //-------------------------------------------------------------------------------------------------
 /**
+ * Print any object which has a member:
+ *
+ * void T::print(std::ostream&) const;
+ */
+template<class T>
+auto
+operator << (
+	std::ostream &a_os,
+	const T      &a_value) -> decltype(a_value.print(a_os), a_os)
+{
+	a_value.print(a_os);
+
+	return a_os;
+}
+//-------------------------------------------------------------------------------------------------
+/**
  * Overload operators << for std::pair
  */
 template<typename T1, typename T2>
