@@ -12,6 +12,11 @@
 #include <tuple>
 #include <algorithm>
 #include <type_traits>
+
+#include <vector>
+#include <list>
+#include <map>
+#include <tuple>
 //-------------------------------------------------------------------------------------------------
 ///@name Trace variables (variable with value)
 ///@{
@@ -188,11 +193,11 @@ operator << (
 /**
  * Overload operators << for ::stringMap
  */
-template<typename T1, typename T2>
+template<typename T1, typename T2, class CompareT>
 inline std::ostream &
 operator << (
-	std::ostream                    &a_os,
-	const std::map<T1, T2, ::CmpCI> &a_value
+	std::ostream                     &a_os,
+	const std::map<T1, T2, CompareT> &a_value
 )
 {
 	a_os << "std::map (" << a_value.size() << " elements)";
