@@ -85,6 +85,7 @@ operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 std::ostream & operator << (
+	std::ostream      &a_os,
 	const std::set<T> &a_value
 )
 {
@@ -93,6 +94,7 @@ std::ostream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 std::ostream & operator << (
+	std::ostream           &a_os,
 	const std::multiset<T> &a_value
 )
 {
@@ -101,6 +103,7 @@ std::ostream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 std::ostream & operator << (
+	std::ostream        &a_os,
 	const std::deque<T> &a_value
 )
 {
@@ -109,6 +112,7 @@ std::ostream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 std::ostream & operator << (
+	std::ostream        &a_os,
 	const std::queue<T> &a_value
 )
 {
@@ -117,6 +121,7 @@ std::ostream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 std::ostream & operator << (
+	std::ostream                 &a_os,
 	const std::priority_queue<T> &a_value
 )
 {
@@ -125,6 +130,7 @@ std::ostream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 std::ostream & operator << (
+	std::ostream        &a_os,
 	const std::stack<T> &a_value
 )
 {
@@ -213,6 +219,7 @@ operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T, std::size_t N>
 OStream & operator << (
+	std::ostream           &a_os,
 	const std::array<T, N> &a_value
 )
 {
@@ -221,6 +228,7 @@ OStream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 OStream & operator << (
+	std::ostream               &a_os,
 	const std::forward_list<T> &a_value
 )
 {
@@ -229,6 +237,7 @@ OStream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T1, typename T2>
 OStream & operator << (
+	std::ostream                     &a_os,
 	const std::unordered_map<T1, T2> &a_value
 )
 {
@@ -237,6 +246,7 @@ OStream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T1, typename T2>
 OStream & operator << (
+	std::ostream                          &a_os,
 	const std::unordered_multimap<T1, T2> &a_value
 )
 {
@@ -245,6 +255,7 @@ OStream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 OStream & operator << (
+	std::ostream                &a_os,
 	const std::unordered_set<T> &a_value
 )
 {
@@ -253,6 +264,7 @@ OStream & operator << (
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 OStream & operator << (
+	std::ostream                     &a_os,
 	const std::unordered_multiset<T> &a_value
 )
 {

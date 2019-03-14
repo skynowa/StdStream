@@ -15,6 +15,14 @@
 #include <list>
 #include <map>
 #include <tuple>
+#include <queue>
+#include <set>
+#include <stack>
+#include <array>
+#include <forward_list>
+#include <initializer_list>
+#include <unordered_map>
+#include <unordered_set>
 //-------------------------------------------------------------------------------------------------
 ///@name Trace variables (variable with value)
 ///@{
@@ -56,7 +64,7 @@
 
 //-------------------------------------------------------------------------------------------------
 template<class T>
-auto operator << (std::ostream &os, const T &value) -> decltype(a_value.print(a_os), a_os);
+auto operator << (std::ostream &os, const T &value) -> decltype(value.print(os), os);
 	///< Print any object which has a member:
 	///< void T::print(std::ostream&) const;
 template<typename T1, typename T2>
@@ -69,22 +77,22 @@ template<typename T>
 std::ostream & operator << (std::ostream &os, const std::list<T> &value);
 
 template<typename T>
-std::ostream & operator << (const std::set<T> &value);
+std::ostream & operator << (std::ostream &os, const std::set<T> &value);
 
 template<typename T>
-std::ostream & operator << (const std::multiset<T> &value);
+std::ostream & operator << (std::ostream &os, const std::multiset<T> &value);
 
 template<typename T>
-std::ostream & operator << (const std::deque<T> &value);
+std::ostream & operator << (std::ostream &os, const std::deque<T> &value);
 
 template<typename T>
-std::ostream & operator << (const std::queue<T> &value);
+std::ostream & operator << (std::ostream &os, const std::queue<T> &value);
 
 template<typename T>
-std::ostream & operator << (const std::priority_queue<T> &value);
+std::ostream & operator << (std::ostream &os, const std::priority_queue<T> &value);
 
 template<typename T>
-std::ostream & operator << (const std::stack<T> &value);
+std::ostream & operator << (std::ostream &os, const std::stack<T> &value);
 
 template<typename T1, typename T2>
 std::ostream & operator << (std::ostream &os, const std::map<T1, T2> &value);
@@ -96,22 +104,22 @@ template<typename T1, typename T2, class CompareT>
 std::ostream & operator << (std::ostream &os, const std::map<T1, T2, CompareT> &value);
 
 template<typename T, std::size_t N>
-std::ostream & operator << (const std::array<T, N> &value);
+std::ostream & operator << (std::ostream &os, const std::array<T, N> &value);
 
 template<typename T>
-std::ostream & operator << (const std::forward_list<T> &value);
+std::ostream & operator << (std::ostream &os, const std::forward_list<T> &value);
 
 template<typename T1, typename T2>
-std::ostream & operator << (const std::unordered_map<T1, T2> &value);
+std::ostream & operator << (std::ostream &os, const std::unordered_map<T1, T2> &value);
 
 template<typename T1, typename T2>
-std::ostream & operator << (const std::unordered_multimap<T1, T2> &value);
+std::ostream & operator << (std::ostream &os, const std::unordered_multimap<T1, T2> &value);
 
 template<typename T>
-std::ostream & operator << (const std::unordered_set<T> &value);
+std::ostream & operator << (std::ostream &os, const std::unordered_set<T> &value);
 
 template<typename T>
-std::ostream & operator << (const std::unordered_multiset<T> &value);
+std::ostream & operator << (std::ostream &os, const std::unordered_multiset<T> &value);
 
 template<typename... Args>
 std::ostream & operator << (std::ostream &os, const std::tuple<Args...> &value);
