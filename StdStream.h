@@ -56,21 +56,17 @@
 
 //-------------------------------------------------------------------------------------------------
 template<class T>
-auto
-operator << (std::ostream &os, const T &value) -> decltype(a_value.print(a_os), a_os);
+auto operator << (std::ostream &os, const T &value) -> decltype(a_value.print(a_os), a_os);
 	///< Print any object which has a member:
 	///< void T::print(std::ostream&) const;
 template<typename T1, typename T2>
-std::ostream &
-operator << (std::ostream &os, const std::pair<T1, T2> &value);
+std::ostream & operator << (std::ostream &os, const std::pair<T1, T2> &value);
 
 template<typename T>
-std::ostream &
-operator << (std::ostream &os, const std::vector<T> &value);
+std::ostream & operator << (std::ostream &os, const std::vector<T> &value);
 
 template<typename T>
-std::ostream &
-operator << (std::ostream &os, const std::list<T> &value);
+std::ostream & operator << (std::ostream &os, const std::list<T> &value);
 
 template<typename T>
 std::ostream & operator << (const std::set<T> &value);
