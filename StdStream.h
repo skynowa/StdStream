@@ -124,4 +124,15 @@ std::ostream & operator << (std::ostream &os, const std::unordered_multiset<T> &
 template<typename... Args>
 std::ostream & operator << (std::ostream &os, const std::tuple<Args...> &value);
 //-------------------------------------------------------------------------------------------------
+namespace stdstream
+{
+
+template<typename IteratorT>
+void printRange(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
+
+template<typename IteratorT>
+void printRangeMap(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
+
+}
+//-------------------------------------------------------------------------------------------------
 #include "StdStream.h"
