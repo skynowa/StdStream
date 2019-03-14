@@ -55,233 +55,69 @@
 **************************************************************************************************/
 
 //-------------------------------------------------------------------------------------------------
-/**
- * Print any object which has a member:
- *
- * void T::print(std::ostream&) const;
- */
 template<class T>
 auto
-operator << (
-	std::ostream &a_os,
-	const T      &a_value) -> decltype(a_value.print(a_os), a_os)
-{
-	a_value.print(a_os);
-
-	return a_os;
-}
-//-------------------------------------------------------------------------------------------------
-/**
- * Overload operators << for std::pair
- */
+operator << (std::ostream &os, const T &value) -> decltype(a_value.print(a_os), a_os);
+	///< Print any object which has a member:
+	///< void T::print(std::ostream&) const;
 template<typename T1, typename T2>
-inline std::ostream &
-operator << (
-	std::ostream            &a_os,
-	const std::pair<T1, T2> &a_value
-)
-{
-	a_os << "std::pair: {" << a_value.first  << ", " << a_value.second << "}";
+std::ostream &
+operator << (std::ostream &os, const std::pair<T1, T2> &value);
 
-	return a_os;
-}
-//-------------------------------------------------------------------------------------------------
-/**
- * Overload operators << for std::vector
- */
 template<typename T>
-inline std::ostream &
-operator << (
-	std::ostream         &a_os,
-	const std::vector<T> &a_value
-)
-{
-	a_os << "std::vector (" << a_value.size() << " elements)";
+std::ostream &
+operator << (std::ostream &os, const std::vector<T> &value);
 
-	if ( a_value.empty() )  {
-		return a_os;
-	}
-
-	a_os << ":" << std::endl;
-
-	for (auto it = a_value.begin(); it != a_value.end(); ++ it) {
-		a_os << "    [" << std::distance(a_value.begin(), it) << "]: " << *it;
-
-		if (it + 1 != a_value.end()) {
-			 a_os << std::endl;
-		}
-	}
-
-	return a_os;
-}
-//-------------------------------------------------------------------------------------------------
-/**
- * Overload operators << for std::list
- */
 template<typename T>
-inline std::ostream &
-operator << (
-	std::ostream       &a_os,
-	const std::list<T> &a_value
-)
-{
-	a_os << "std::list (" << a_value.size() << " elements)";
+std::ostream &
+operator << (std::ostream &os, const std::list<T> &value);
 
-	if ( a_value.empty() ) {
-		return a_os;
-	}
+template<typename T>
+std::ostream & operator << (const std::set<T> &value);
 
-	a_os << ":" << std::endl;
+template<typename T>
+std::ostream & operator << (const std::multiset<T> &value);
 
-	for (auto it = a_value.begin(); it != a_value.end(); ++ it) {
-		a_os << "    [" << std::distance(a_value.begin(), it) << "]: " << *it;
+template<typename T>
+std::ostream & operator << (const std::deque<T> &value);
 
-		if (++ it != a_value.end()) {
-			 a_os << std::endl;
-		}
+template<typename T>
+std::ostream & operator << (const std::queue<T> &value);
 
-		-- it;
-	}
+template<typename T>
+std::ostream & operator << (const std::priority_queue<T> &value);
 
-	return a_os;
-}
-//-------------------------------------------------------------------------------------------------
-/**
- * Overload operators << for std::map
- */
+template<typename T>
+std::ostream & operator << (const std::stack<T> &value);
+
 template<typename T1, typename T2>
-inline std::ostream &
-operator << (
-	std::ostream           &a_os,
-	const std::map<T1, T2> &a_value
-)
-{
-	a_os << "std::map (" << a_value.size() << " elements)";
+std::ostream & operator << (std::ostream &os, const std::map<T1, T2> &value);
 
-	if ( a_value.empty() ) {
-		return a_os;
-	}
-
-	a_os << ":" << std::endl;
-
-	for (auto it = a_value.begin(); it != a_value.end(); ++ it) {
-		a_os << "    {" << it->first  << ", " << it->second << "}";
-
-		if (++ it != a_value.end()) {
-			 a_os << std::endl;
-		}
-
-		-- it;
-	}
-
-	return a_os;
-}
-//-------------------------------------------------------------------------------------------------
-/**
- * Overload operators << for std::miltimap
- */
 template<typename T1, typename T2>
-inline std::ostream &
-operator << (
-	std::ostream                &a_os,
-	const std::multimap<T1, T2> &a_value
-)
-{
-	a_os << std::endl;
-	a_os << "std::multimap (" << a_value.size() << " elements):" << std::endl;
+std::ostream & operator << (std::ostream &os, const std::multimap<T1, T2> &value);
 
-	typename std::multimap<T1, T2>::const_iterator it;
-	for (it = a_value.begin(); it != a_value.end(); ++ it) {
-		a_os << "    {" << it->first  << ", " << it->second << "}";
-
-		if (++ it != a_value.end()) {
-			 a_os << std::endl;
-		}
-
-		-- it;
-	}
-
-	return a_os;
-}
-//-------------------------------------------------------------------------------------------------
-/**
- * Overload operators << for ::stringMap
- */
 template<typename T1, typename T2, class CompareT>
-inline std::ostream &
-operator << (
-	std::ostream                     &a_os,
-	const std::map<T1, T2, CompareT> &a_value
-)
-{
-	a_os << "std::map (" << a_value.size() << " elements)";
+std::ostream & operator << (std::ostream &os, const std::map<T1, T2, CompareT> &value);
 
-	if ( a_value.empty() ) {
-		return a_os;
-	}
+template<typename T, std::size_t N>
+std::ostream & operator << (const std::array<T, N> &value);
 
-	a_os << ":" << std::endl;
+template<typename T>
+std::ostream & operator << (const std::forward_list<T> &value);
 
-	for (auto it = a_value.begin(); it != a_value.end(); ++ it) {
-		a_os << "    {" << it->first  << ", " << it->second << "}";
+template<typename T1, typename T2>
+std::ostream & operator << (const std::unordered_map<T1, T2> &value);
 
-		if (++ it != a_value.end()) {
-			 a_os << std::endl;
-		}
+template<typename T1, typename T2>
+std::ostream & operator << (const std::unordered_multimap<T1, T2> &value);
 
-		-- it;
-	}
+template<typename T>
+std::ostream & operator << (const std::unordered_set<T> &value);
 
-	return a_os;
-}
-//-------------------------------------------------------------------------------------------------
-/**
- * Overload operators << for std::tuple
- */
-template<typename Tuple, std::size_t N>
-struct TuplePrinter
-{
-	static void
-	print(std::ostream &a_os, const Tuple &a_t)
-	{
-		TuplePrinter<Tuple, N - 1>::print(a_os, a_t);
-		a_os << ", " << std::get<N - 1>(a_t);
-	}
-};
-
-template<typename Tuple>
-struct TuplePrinter<Tuple, 1>
-{
-	static void
-	print(std::ostream &a_os, const Tuple &a_t)
-	{
-		a_os << std::get<0>(a_t);
-	}
-};
+template<typename T>
+std::ostream & operator << (const std::unordered_multiset<T> &value);
 
 template<typename... Args>
-inline std::ostream &
-operator << (
-	std::ostream              &a_os,
-	const std::tuple<Args...> &a_value
-)
-{
-#if 0
-	a_os << "std::tuple (" << std::tuple_size<decltype(a_value)>::value << " elements)";
-
-	if ( a_value.empty() ) {
-		return a_os;
-	}
-#else
-	a_os << "std::tuple";
-#endif
-
-	a_os << ":" << std::endl;
-
-	a_os << "{";
-	TuplePrinter<decltype(a_value), sizeof...(Args)>::print(a_os, a_value);
-	a_os << "}";
-
-	return a_os;
-}
+std::ostream & operator << (std::ostream &os, const std::tuple<Args...> &value);
 //-------------------------------------------------------------------------------------------------
+#include "StdStream.h"
