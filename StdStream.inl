@@ -36,7 +36,7 @@ operator << (
 	const std::vector<T> &a_value
 )
 {
-	printRange("std::vector", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::vector", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -48,7 +48,7 @@ operator << (
 	const std::list<T> &a_value
 )
 {
-	printRange("std::list", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::list", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -60,7 +60,7 @@ operator << (
 	const std::set<T> &a_value
 )
 {
-	printRange("std::set", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::set", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -72,7 +72,7 @@ operator << (
 	const std::multiset<T> &a_value
 )
 {
-	printRange("std::multiset", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::multiset", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -84,7 +84,7 @@ operator << (
 	const std::deque<T> &a_value
 )
 {
-	printRange("std::deque", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::deque", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -96,7 +96,7 @@ operator << (
 	const std::queue<T> &a_value
 )
 {
-	printRange("std::queue", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::queue", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -108,7 +108,7 @@ operator << (
 	const std::priority_queue<T> &a_value
 )
 {
-	printRange("std::priority_queue", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::priority_queue", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -120,7 +120,7 @@ operator << (
 	const std::stack<T> &a_value
 )
 {
-	printRange("std::stack", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::stack", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -132,7 +132,7 @@ operator << (
 	const std::map<T1, T2> &a_value
 )
 {
-	printRangeMap("std::map", a_os, a_value.begin(), a_value.end());
+	stdstream::printRangeMap("std::map", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -144,7 +144,7 @@ operator << (
 	const std::multimap<T1, T2> &a_value
 )
 {
-	printRangeMap("std::multimap", a_os, a_value.begin(), a_value.end());
+	stdstream::printRangeMap("std::multimap", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -156,7 +156,7 @@ operator << (
 	const std::map<T1, T2, CompareT> &a_value
 )
 {
-	printRangeMap("std::map", a_os, a_value.begin(), a_value.end());
+	stdstream::printRangeMap("std::map", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -168,7 +168,7 @@ operator << (
 	const std::array<T, N> &a_value
 )
 {
-	printRange("std::array", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::array", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -181,7 +181,7 @@ operator << (
 )
 {
 	a_os << "std::forward_list (" << a_value.size() << " elements)";
-	printRange(a_os, "", a_value.begin(), a_value.end());
+	stdstream::printRange(a_os, "", a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -193,7 +193,7 @@ operator << (
 	const std::unordered_map<T1, T2> &a_value
 )
 {
-	printRangeMap("std::unordered_map", a_os, a_value.begin(), a_value.end());
+	stdstream::printRangeMap("std::unordered_map", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -205,7 +205,7 @@ operator << (
 	const std::unordered_multimap<T1, T2> &a_value
 )
 {
-	printRangeMap("std::unordered_multimap", a_os, a_value.begin(), a_value.end());
+	stdstream::printRangeMap("std::unordered_multimap", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -217,7 +217,7 @@ operator << (
 	const std::unordered_set<T> &a_value
 )
 {
-	printRange("std::unordered_set", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::unordered_set", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -229,7 +229,7 @@ operator << (
 	const std::unordered_multiset<T> &a_value
 )
 {
-	printRange("std::unordered_multiset", a_os, a_value.begin(), a_value.end());
+	stdstream::printRange("std::unordered_multiset", a_os, a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -303,7 +303,8 @@ printRange(
 {
 	// titile
 	if ( !a_contName.empty() ) {
-		a_os << a_contName << " (" << a_value.size() << " elements)";
+		const std::size_t valueSize = std::distance(a_value.begin(), a_value.end());
+		a_os << a_contName << " (" << valueSize << " elements)";
 	}
 
 	// body
@@ -332,6 +333,13 @@ printRangeMap(
     IteratorT          a_last		///< last iterator
 )
 {
+	// titile
+	if ( !a_contName.empty() ) {
+		const std::size_t valueSize = std::distance(a_value.begin(), a_value.end());
+		a_os << a_contName << " (" << valueSize << " elements)";
+	}
+
+	// body
     if (a_first == a_last) {
         a_os << "{}";
         return;
