@@ -303,7 +303,7 @@ printRange(
 {
 	// titile
 	if ( !a_contName.empty() ) {
-		const std::size_t valueSize = std::distance(a_value.begin(), a_value.end());
+		const std::size_t valueSize = std::distance(a_first, a_last);
 		a_os << a_contName << " (" << valueSize << " elements)";
 	}
 
@@ -335,7 +335,7 @@ printRangeMap(
 {
 	// titile
 	if ( !a_contName.empty() ) {
-		const std::size_t valueSize = std::distance(a_value.begin(), a_value.end());
+		const std::size_t valueSize = std::distance(a_first, a_last);
 		a_os << a_contName << " (" << valueSize << " elements)";
 	}
 

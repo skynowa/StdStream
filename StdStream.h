@@ -135,4 +135,4 @@ void printRangeMap(std::ostream &os, const std::string &contName, IteratorT firs
 
 }
 //-------------------------------------------------------------------------------------------------
-#include "StdStream.h"
+#include "StdStream.inl"
