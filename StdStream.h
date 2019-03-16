@@ -129,9 +129,13 @@ namespace stdstream
 
 template<typename IteratorT>
 void printRange(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
+template<typename ContT>
+void printContainer(std::ostream &os, const std::string &contName, const ContT &cont);
 
 template<typename IteratorT>
 void printRangeMap(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
+template<typename MapT>
+void printMap(std::ostream &os, const std::string &contName, const MapT &cont);
 
 }
 //-------------------------------------------------------------------------------------------------
