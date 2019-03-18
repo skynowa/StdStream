@@ -94,14 +94,11 @@ std::ostream & operator << (std::ostream &os, const std::priority_queue<T> &valu
 template<typename T>
 std::ostream & operator << (std::ostream &os, const std::stack<T> &value);
 
-template<typename T1, typename T2>
-std::ostream & operator << (std::ostream &os, const std::map<T1, T2> &value);
-
-template<typename T1, typename T2>
-std::ostream & operator << (std::ostream &os, const std::multimap<T1, T2> &value);
-
 template<typename T1, typename T2, class CompareT>
 std::ostream & operator << (std::ostream &os, const std::map<T1, T2, CompareT> &value);
+
+template<typename T1, typename T2, class CompareT>
+std::ostream & operator << (std::ostream &os, const std::multimap<T1, T2> &value);
 
 template<typename T, std::size_t N>
 std::ostream & operator << (std::ostream &os, const std::array<T, N> &value);
@@ -126,6 +123,9 @@ std::ostream & operator << (std::ostream &os, const std::tuple<Args...> &value);
 //-------------------------------------------------------------------------------------------------
 namespace stdstream
 {
+
+template<typename IteratorT>
+void printTitle(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
 
 template<typename IteratorT>
 void printRange(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);

@@ -11,7 +11,7 @@
 int main(int, char **)
 {
 	{
-		// auto
+		// a_value.print(a_os);
 	}
 
 	{
@@ -19,7 +19,6 @@ int main(int, char **)
 		std::cout << value << std::endl;
 	}
 
-#if 0
 	{
 		std::vector<std::string> value;
 		std::cout << value << std::endl;
@@ -66,13 +65,13 @@ int main(int, char **)
 	}
 
 	{
-		std::multimap<std::string, std::string> value;
+		std::map<std::string, std::string, std::greater<std::string>> value;
 		std::cout << value << std::endl;
 	}
 
 	{
-		/// std::map<std::string, std::string, CompareT> value;
-		/// std::cout << value << std::endl;
+		std::multimap<std::string, std::string> value;
+		std::cout << value << std::endl;
 	}
 
 	{
@@ -106,10 +105,9 @@ int main(int, char **)
 	}
 
 	{
-		// std::tuple<Args...> value;
-		// std::cout << value << std::endl;
+		auto value = std::make_tuple("test", 3.1, 14, 'y');
+		std::cout << value << std::endl;
 	}
-#endif
 
     return EXIT_SUCCESS;
 }
