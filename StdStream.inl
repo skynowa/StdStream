@@ -24,7 +24,7 @@ operator << (
 	const std::pair<T1, T2> &a_value
 )
 {
-	a_os << "std::pair: {" << a_value.first  << ", " << a_value.second << "}";
+	a_os << "std::pair: {" << a_value.first  << "," << a_value.second << "}";
 
 	return a_os;
 }
