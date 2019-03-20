@@ -236,48 +236,45 @@ operator << (
 	return a_os;
 }
 //--------------------------------------------------------------------------------------------------
-template<typename Tuple, std::size_t N>
+template<typename TupleT, std::size_t N>
 struct TuplePrinter
 {
 	static void
-	print(std::ostream &a_os, const Tuple &a_t)
+	print(std::ostream &a_os, const TupleT &a_t)
 	{
-		TuplePrinter<Tuple, N - 1>::print(a_os, a_t);
+		TuplePrinter<TupleT, N - 1>::print(a_os, a_t);
 		a_os << ", " << std::get<N - 1>(a_t);
 	}
 };
 
-template<typename Tuple>
-struct TuplePrinter<Tuple, 1>
+template<typename TupleT>
+struct TuplePrinter<TupleT, 1>
 {
 	static void
-	print(std::ostream &a_os, const Tuple &a_t)
+	print(std::ostream &a_os, const TupleT &a_t)
 	{
 		a_os << std::get<0>(a_t);
 	}
 };
 
-template<typename... Args>
+template<typename... ArgsT>
 inline std::ostream &
 operator << (
-	std::ostream              &a_os,
-	const std::tuple<Args...> &a_value
+	std::ostream               &a_os,
+	const std::tuple<ArgsT...> &a_value
 )
 {
-#if 0
-	a_os << "std::tuple (" << std::tuple_size<decltype(a_value)>::value << " elements)";
+	const std::size_t valueSize = sizeof...(ArgsT);
 
-	if ( a_value.empty() ) {
+	a_os << "std::tuple (size=" << valueSize << "): ";
+
+	if (valueSize == 0) {
+        a_os << "{}";
 		return a_os;
 	}
-#else
-	a_os << "std::tuple";
-#endif
-
-	a_os << ":" << std::endl;
 
 	a_os << "{";
-	TuplePrinter<decltype(a_value), sizeof...(Args)>::print(a_os, a_value);
+	TuplePrinter<decltype(a_value), sizeof...(ArgsT)>::print(a_os, a_value);
 	a_os << "}";
 
 	return a_os;
@@ -304,7 +301,7 @@ printTitle(
 )
 {
 	const std::size_t valueSize = std::distance(a_first, a_last);
-	a_os << a_contName << " (" << valueSize << " elements):" << std::endl;
+	a_os << a_contName << " (size=" << valueSize << "): ";
 }
 //-------------------------------------------------------------------------------------------------
 template<typename IteratorT>
