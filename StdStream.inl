@@ -265,8 +265,7 @@ operator << (
 )
 {
 	const std::size_t valueSize = sizeof...(ArgsT);
-
-	a_os << "std::tuple (size=" << valueSize << "): ";
+	a_os << "std::tuple" << " (size=" << valueSize << "): ";
 
 	if (valueSize == 0) {
         a_os << "{}";
