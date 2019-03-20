@@ -243,7 +243,7 @@ struct TuplePrinter
 	print(std::ostream &a_os, const TupleT &a_t)
 	{
 		TuplePrinter<TupleT, N - 1>::print(a_os, a_t);
-		a_os << ", " << std::get<N - 1>(a_t);
+		a_os << "," << std::get<N - 1>(a_t);
 	}
 };
 
