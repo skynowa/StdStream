@@ -26,33 +26,38 @@
 //-------------------------------------------------------------------------------------------------
 ///@name Trace variables (variable with value)
 ///@{
-#define TRACE_VAR(v1) \
+#define STD_TRACE_VAR(v1) \
 	#v1 ": " << (v1)
-#define TRACE_VAR2(v1, v2) \
-	TRACE_VAR(v1) << ", " << TRACE_VAR(v2)
-#define TRACE_VAR3(v1, v2, v3) \
-	TRACE_VAR2(v1, v2) << ", " << TRACE_VAR(v3)
-#define TRACE_VAR4(v1, v2, v3, v4) \
-	TRACE_VAR3(v1, v2, v3) << ", " << TRACE_VAR(v4)
-#define TRACE_VAR5(v1, v2, v3, v4, v5) \
-	TRACE_VAR4(v1, v2, v3, v4) << ", " << TRACE_VAR(v5)
-#define TRACE_VAR6(v1, v2, v3, v4, v5, v6) \
-	TRACE_VAR5(v1, v2, v3, v4, v5) << ", " << TRACE_VAR(v6)
-#define TRACE_VAR7(v1, v2, v3, v4, v5, v6, v7) \
-	TRACE_VAR6(v1, v2, v3, v4, v5, v6) << ", " << TRACE_VAR(v7)
-#define TRACE_VAR8(v1, v2, v3, v4, v5, v6, v7, v8) \
-	TRACE_VAR7(v1, v2, v3, v4, v5, v6, v7) << ", " << TRACE_VAR(v8)
-#define TRACE_VAR9(v1, v2, v3, v4, v5, v6, v7, v8, v9) \
-	TRACE_VAR8(v1, v2, v3, v4, v5, v6, v7, v8) << ", " << TRACE_VAR(v9)
-#define TRACE_VAR10(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10) \
-	TRACE_VAR9(v1, v2, v3, v4, v5, v6, v7, v8, v9) << ", " << TRACE_VAR(v10)
-#define TRACE_VAR11(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11) \
-	TRACE_VAR10(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10) << ", " << TRACE_VAR(v11)
+#define STD_TRACE_VAR2(v1, v2) \
+	STD_TRACE_VAR(v1) << ", " << STD_TRACE_VAR(v2)
+#define STD_TRACE_VAR3(v1, v2, v3) \
+	STD_TRACE_VAR2(v1, v2) << ", " << STD_TRACE_VAR(v3)
+#define STD_TRACE_VAR4(v1, v2, v3, v4) \
+	STD_TRACE_VAR3(v1, v2, v3) << ", " << STD_TRACE_VAR(v4)
+#define STD_TRACE_VAR5(v1, v2, v3, v4, v5) \
+	STD_TRACE_VAR4(v1, v2, v3, v4) << ", " << STD_TRACE_VAR(v5)
+#define STD_TRACE_VAR6(v1, v2, v3, v4, v5, v6) \
+	STD_TRACE_VAR5(v1, v2, v3, v4, v5) << ", " << STD_TRACE_VAR(v6)
+#define STD_TRACE_VAR7(v1, v2, v3, v4, v5, v6, v7) \
+	STD_TRACE_VAR6(v1, v2, v3, v4, v5, v6) << ", " << STD_TRACE_VAR(v7)
+#define STD_TRACE_VAR8(v1, v2, v3, v4, v5, v6, v7, v8) \
+	STD_TRACE_VAR7(v1, v2, v3, v4, v5, v6, v7) << ", " << STD_TRACE_VAR(v8)
+#define STD_TRACE_VAR9(v1, v2, v3, v4, v5, v6, v7, v8, v9) \
+	STD_TRACE_VAR8(v1, v2, v3, v4, v5, v6, v7, v8) << ", " << STD_TRACE_VAR(v9)
+#define STD_TRACE_VAR10(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10) \
+	STD_TRACE_VAR9(v1, v2, v3, v4, v5, v6, v7, v8, v9) << ", " << STD_TRACE_VAR(v10)
+#define STD_TRACE_VAR11(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11) \
+	STD_TRACE_VAR10(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10) << ", " << STD_TRACE_VAR(v11)
 
-#define UNKNOWN_VAR(v) \
-	"Unknown " << TRACE_VAR(v)
-#define TRACE_PTR(p) \
-     #p ": " << "{" << p << ", " << (p ? *p : 0) << "}"
+#define STD_PRINT_VAR(v) \
+	#v ": [" << (v) << "]"
+	///< trace variable with delimiters ("[var]")
+#define STD_UNKNOWN_VAR(v) \
+	"Unknown " << STD_TRACE_VAR(v)
+#define STD_INVALID_VAR(v) \
+	"Invalid " << STD_TRACE_VAR(v)
+#define STD_TRACE_PTR(p) \
+	#p ": " << "{" << (p) << ", " << ((p) ? *(p) : 0) << "}"
 ///@}
 //-------------------------------------------------------------------------------------------------
 #define STD_TRACE_POINT \
