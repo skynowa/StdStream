@@ -9,51 +9,6 @@
     #include <cxxabi.h>
 #endif
 
-template<typename T>
-std::string
-typeNameDemangle(const T &a_cont)
-{
-	const char * const typeName = typeid( decltype(a_cont) ).name();
-
-	std::string sRv;
-	{
-	#if defined(__GNUC__) || defined(__MINGW32__) || defined(__MINGW64__)
-		char        *buff   {};
-		std::size_t *length {};
-		int          status {- 1};
-
-		char *demangledName = abi::__cxa_demangle(typeName, buff, length,
-			&status);
-
-		sRv = (demangledName == nullptr) ? "<unknown>" : demangledName;
-
-		// std::cout << STD_PRINT_VAR(sRv) << std::endl;
-
-		std::free(demangledName);
-		demangledName = nullptr;
-	#else
-		sRv = (typeName == nullptr) ? "<unknown>" : typeName;
-	#endif
-	}
-
-	std::string demangledNameCustom;
-	{
-	    const auto posBegin = sRv.find("<");
-		const auto posEnd   = sRv.rfind(">");
-		// std::cout << STD_TRACE_VAR2(posBegin, posEnd) << std::endl;
-
-		if (posBegin != std::string::npos &&
-			posEnd   != std::string::npos)
-		{
-			demangledNameCustom += sRv.substr(0, posBegin);
-			demangledNameCustom += sRv.substr(posEnd + 1);
-		}
-	}
-
-    return demangledNameCustom;
-}
-//-------------------------------------------------------------------------------------------------
-
 //-------------------------------------------------------------------------------------------------
 template<class T>
 inline auto
@@ -87,7 +42,7 @@ operator << (
 )
 {
 	/// stdstream::Print print("std::vector", ",", a_os);
-	stdstream::Print print(::typeNameDemangle(a_value), ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -206,7 +161,8 @@ operator << (
 	const std::map<T1, T2, CompareT> &a_value
 )
 {
-	stdstream::Print print("std::map", "\n", a_os);
+	/// stdstream::Print print("std::map", "\n", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value) + "-xxxxx", "\n", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -414,6 +370,50 @@ Print::_title(
 {
 	const auto valueSize = std::distance(a_first, a_last);
 	_os << _contName << " (size=" << valueSize << "): ";
+}
+//-------------------------------------------------------------------------------------------------
+template<typename T>
+std::string
+Print::typeNameDemangle(const T &a_cont)
+{
+	const char * const typeName = typeid( decltype(a_cont) ).name();
+
+	std::string sRv;
+	{
+	#if defined(__GNUC__) || defined(__MINGW32__) || defined(__MINGW64__)
+		char        *buff   {};
+		std::size_t *length {};
+		int          status {- 1};
+
+		char *demangledName = abi::__cxa_demangle(typeName, buff, length,
+			&status);
+
+		sRv = (demangledName == nullptr) ? "<unknown>" : demangledName;
+
+		// std::cout << STD_PRINT_VAR(sRv) << std::endl;
+
+		std::free(demangledName);
+		demangledName = nullptr;
+	#else
+		sRv = (typeName == nullptr) ? "<unknown>" : typeName;
+	#endif
+	}
+
+	std::string demangledNameCustom;
+	{
+	    const auto posBegin = sRv.find("<");
+		const auto posEnd   = sRv.rfind(">");
+		// std::cout << STD_TRACE_VAR2(posBegin, posEnd) << std::endl;
+
+		if (posBegin != std::string::npos &&
+			posEnd   != std::string::npos)
+		{
+			demangledNameCustom += sRv.substr(0, posBegin);
+			demangledNameCustom += sRv.substr(posEnd + 1);
+		}
+	}
+
+    return demangledNameCustom;
 }
 //-------------------------------------------------------------------------------------------------
 

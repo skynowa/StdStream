@@ -172,6 +172,10 @@ public:
 	void container(const ContT &cont);
 			///< all container
 
+	// static
+	template<typename T>
+	static std::string typeNameDemangle(const T &cont);
+			///< demangled type name
 private:
 	const std::string _contName;
 	const std::string _delimiter;
