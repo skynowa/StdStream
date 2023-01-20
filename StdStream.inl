@@ -5,13 +5,6 @@
 
 
 //-------------------------------------------------------------------------------------------------
-#if defined(__GNUC__) || \
-	defined(__MINGW32__) || defined(__MINGW64__) || \
-	defined(__clang__)
-
-    #include <cxxabi.h>
-#endif
-//-------------------------------------------------------------------------------------------------
 template<class T>
 inline auto
 operator << (
@@ -335,6 +328,13 @@ operator << (
 *	stdstream
 *
 **************************************************************************************************/
+
+#if defined(__GNUC__) || \
+	defined(__MINGW32__) || defined(__MINGW64__) || \
+	defined(__clang__)
+
+    #include <cxxabi.h>
+#endif
 
 namespace stdstream
 {
