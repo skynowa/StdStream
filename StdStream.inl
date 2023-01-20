@@ -195,7 +195,7 @@ operator << (
 )
 {
 	stdstream::Print print(a_os);
-	print.range("std::forward_list", a_value.begin(), a_value.end());
+	print.range("std::forward_list", a_value.cbegin(), a_value.cend());
 
 	return a_os;
 }
@@ -234,7 +234,7 @@ operator << (
 )
 {
 	stdstream::Print print(a_os);
-	print.range("std::unordered_set", a_value.begin(), a_value.end());
+	print.range("std::unordered_set", a_value.cbegin(), a_value.cend());
 
 	return a_os;
 }
@@ -247,7 +247,7 @@ operator << (
 )
 {
 	stdstream::Print print(a_os);
-	print.range("std::unordered_multiset", a_value.begin(), a_value.end());
+	print.range("std::unordered_multiset", a_value.cbegin(), a_value.cend());
 
 	return a_os;
 }
@@ -361,7 +361,7 @@ Print::container(
     const ContT       &a_value		///< container
 )
 {
-	range(a_contName, a_value.begin(), a_value.end());
+	range(a_contName, a_value.cbegin(), a_value.cend());
 }
 //-------------------------------------------------------------------------------------------------
 template<typename IteratorT>
@@ -399,7 +399,7 @@ Print::map(
     const MapT        &a_value		///< container
 )
 {
-	rangeMap(a_contName, a_value.begin(), a_value.end());
+	rangeMap(a_contName, a_value.cbegin(), a_value.cend());
 }
 //-------------------------------------------------------------------------------------------------
 
