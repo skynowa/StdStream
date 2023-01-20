@@ -378,23 +378,23 @@ Print::range(
 template<typename ContT>
 inline void
 Print::container(
-    const ContT &a_value ///< container
+    const ContT &a_cont ///< container
 )
 {
-	range(a_value.cbegin(), a_value.cend());
+	range(a_cont.cbegin(), a_cont.cend());
 }
 //-------------------------------------------------------------------------------------------------
 template<typename T1, typename T2>
 inline void
 Print::container(
-	const std::pair<T1, T2> &a_value ///< container
+	const std::pair<T1, T2> &a_cont ///< container
 )
 {
 	// titile
 	_os << _contName << ": ";
 
 	// body
-	_os << "{" << a_value.first  << _delimiter << a_value.second << "}";
+	_os << "{" << a_cont.first  << _delimiter << a_cont.second << "}";
 }
 //-------------------------------------------------------------------------------------------------
 template<typename IteratorT>
@@ -411,10 +411,10 @@ Print::_title(
 template<typename T>
 std::string
 Print::typeNameDemangle(
-	const T &a_value ///< container
+	const T &a_cont ///< container
 )
 {
-	const char * const typeName = typeid( decltype(a_value) ).name();
+	const char * const typeName = typeid( decltype(a_cont) ).name();
 
 	std::string demangledName;
 	{
