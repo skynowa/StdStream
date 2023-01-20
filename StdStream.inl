@@ -378,37 +378,34 @@ Print::typeNameDemangle(const T &a_cont)
 {
 	const char * const typeName = typeid( decltype(a_cont) ).name();
 
-	std::string sRv;
+	std::string demangledName;
 	{
 	#if defined(__GNUC__) || defined(__MINGW32__) || defined(__MINGW64__)
 		char        *buff   {};
 		std::size_t *length {};
 		int          status {- 1};
 
-		char *demangledName = abi::__cxa_demangle(typeName, buff, length,
-			&status);
+		char *pszRv = abi::__cxa_demangle(typeName, buff, length, &status);
+		demangledName = (pszRv == nullptr) ? "<unknown>" : pszRv;
 
-		sRv = (demangledName == nullptr) ? "<unknown>" : demangledName;
-		// std::cout << STD_PRINT_VAR(sRv) << std::endl;
-
-		std::free(demangledName);
-		demangledName = nullptr;
+		std::free(pszRv);
+		pszRv = nullptr;
 	#else
-		sRv = (typeName == nullptr) ? "<unknown>" : typeName;
+		demangledName = (typeName == nullptr) ? "<unknown>" : typeName;
 	#endif
 	}
 
 	std::string demangledNameCustom;
 	{
-	    const auto posBegin = sRv.find("<");
-		const auto posEnd   = sRv.rfind(">");
+	    const auto posBegin = demangledName.find("<");
+		const auto posEnd   = demangledName.rfind(">");
 		// std::cout << STD_TRACE_VAR2(posBegin, posEnd) << std::endl;
 
 		if (posBegin != std::string::npos &&
 			posEnd   != std::string::npos)
 		{
-			demangledNameCustom += sRv.substr(0, posBegin);
-			demangledNameCustom += sRv.substr(posEnd + 1);
+			demangledNameCustom += demangledName.substr(0, posBegin);
+			demangledNameCustom += demangledName.substr(posEnd + 1);
 		}
 	}
 
