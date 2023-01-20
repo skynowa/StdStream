@@ -434,8 +434,10 @@ Print::typeNameDemangle(
 	}
 
 	std::string demangledNameCustom;
+
+	// Template's info - remove (pair<int, int> -> pair)
 	{
-	    const auto posBegin = demangledName.find("<");
+		const auto posBegin = demangledName.find("<");
 		const auto posEnd   = demangledName.rfind(">");
 		// std::cout << STD_TRACE_VAR2(posBegin, posEnd) << std::endl;
 
@@ -447,7 +449,7 @@ Print::typeNameDemangle(
 		}
 	}
 
-	// std::__cxx11::list -> std::list
+	// "__cxx11" - remove (std::__cxx11::list -> std::list)
 	{
 		const std::string cxxStr = "__cxx11::";
 
