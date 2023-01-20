@@ -150,7 +150,7 @@ namespace stdstream
 
 //-------------------------------------------------------------------------------------------------
 class Print final
-	///
+	/// Printer for std::ostream
 {
 public:
 ///\name ctors, dtor
