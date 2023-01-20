@@ -10,8 +10,8 @@
 #include <iostream>
 #include <sstream>
 #include <typeinfo>
-#include <algorithm>
 #include <type_traits>
+#include <algorithm>
 #include <vector>
 #include <list>
 #include <map>
