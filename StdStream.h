@@ -148,18 +148,33 @@ std::ostream & operator << (std::ostream &os, const std::tuple<Args...> &value);
 namespace stdstream
 {
 
-template<typename IteratorT>
-void printTitle(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
+//-------------------------------------------------------------------------------------------------
+class Print final
+	///
+{
+public:
+	Print() = delete;
+	Print(std::ostream &os);
+	~Print() = default;
 
-template<typename IteratorT>
-void printRange(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
-template<typename ContT>
-void printContainer(std::ostream &os, const std::string &contName, const ContT &cont);
+	template<typename IteratorT>
+	void title(const std::string &contName, IteratorT first, IteratorT last);
 
-template<typename IteratorT>
-void printRangeMap(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
-template<typename MapT>
-void printMap(std::ostream &os, const std::string &contName, const MapT &cont);
+	template<typename IteratorT>
+	void range(const std::string &contName, IteratorT first, IteratorT last);
+	template<typename ContT>
+	void container(const std::string &contName, const ContT &cont);
+
+	template<typename IteratorT>
+	void rangeMap(const std::string &contName, IteratorT first, IteratorT last);
+	template<typename MapT>
+	void map(const std::string &contName, const MapT &cont);
+
+private:
+	std::ostream &_os;
+};
+//-------------------------------------------------------------------------------------------------
+
 
 }
 //-------------------------------------------------------------------------------------------------

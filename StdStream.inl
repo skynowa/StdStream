@@ -36,7 +36,8 @@ operator << (
 	const std::vector<T> &a_value
 )
 {
-	stdstream::printContainer(a_os, "std::vector", a_value);
+	stdstream::Print print(a_os);
+	print.container("std::vector", a_value);
 
 	return a_os;
 }
@@ -48,7 +49,8 @@ operator << (
 	const std::list<T> &a_value
 )
 {
-	stdstream::printContainer(a_os, "std::list", a_value);
+	stdstream::Print print(a_os);
+	print.container("std::list", a_value);
 
 	return a_os;
 }
@@ -60,7 +62,8 @@ operator << (
 	const std::set<T> &a_value
 )
 {
-	stdstream::printContainer(a_os, "std::set", a_value);
+	stdstream::Print print(a_os);
+	print.container("std::set", a_value);
 
 	return a_os;
 }
@@ -72,7 +75,8 @@ operator << (
 	const std::multiset<T> &a_value
 )
 {
-	stdstream::printContainer(a_os, "std::multiset", a_value);
+	stdstream::Print print(a_os);
+	print.container("std::multiset", a_value);
 
 	return a_os;
 }
@@ -84,7 +88,8 @@ operator << (
 	const std::deque<T> &a_value
 )
 {
-	stdstream::printContainer(a_os, "std::deque", a_value);
+	stdstream::Print print(a_os);
+	print.container("std::deque", a_value);
 
 	return a_os;
 }
@@ -101,7 +106,8 @@ operator << (
     const_iterator it_begin = &a_value.front();
     const_iterator it_end   = &a_value.front() + a_value.size();
 
-	stdstream::printRange(a_os, "std::queue", it_begin, it_end);
+    stdstream::Print print(a_os);
+    print.range("std::queue", it_begin, it_end);
 
 	return a_os;
 }
@@ -118,7 +124,8 @@ operator << (
     const_iterator it_begin = &a_value.top();
     const_iterator it_end   = &a_value.top() + a_value.size();
 
-	stdstream::printRange(a_os, "std::priority_queue", it_begin, it_end);
+    stdstream::Print print(a_os);
+    print.range("std::priority_queue", it_begin, it_end);
 
 	return a_os;
 }
@@ -135,7 +142,8 @@ operator << (
     const_iterator it_begin = &a_value.top() - a_value.size() + 1;
     const_iterator it_end   = &a_value.top() + 1;
 
-	stdstream::printRange(a_os, "std::stack", it_begin, it_end);
+    stdstream::Print print(a_os);
+    print.range("std::stack", it_begin, it_end);
 
 	return a_os;
 }
@@ -147,7 +155,8 @@ operator << (
 	const std::map<T1, T2, CompareT> &a_value
 )
 {
-	stdstream::printMap(a_os, "std::map", a_value);
+	stdstream::Print print(a_os);
+	print.map("std::map", a_value);
 
 	return a_os;
 }
@@ -159,7 +168,8 @@ operator << (
 	const std::multimap<T1, T2, CompareT> &a_value
 )
 {
-	stdstream::printMap(a_os, "std::multimap", a_value);
+	stdstream::Print print(a_os);
+	print.map("std::multimap", a_value);
 
 	return a_os;
 }
@@ -171,7 +181,8 @@ operator << (
 	const std::array<T, N> &a_value
 )
 {
-	stdstream::printContainer(a_os, "std::array", a_value);
+	stdstream::Print print(a_os);
+	print.container("std::array", a_value);
 
 	return a_os;
 }
@@ -183,7 +194,8 @@ operator << (
 	const std::forward_list<T> &a_value
 )
 {
-	stdstream::printRange(a_os, "std::forward_list", a_value.begin(), a_value.end());
+	stdstream::Print print(a_os);
+	print.range("std::forward_list", a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -195,7 +207,8 @@ operator << (
 	const std::unordered_map<T1, T2> &a_value
 )
 {
-	stdstream::printMap(a_os, "std::unordered_map", a_value);
+	stdstream::Print print(a_os);
+	print.map("std::unordered_map", a_value);
 
 	return a_os;
 }
@@ -207,7 +220,8 @@ operator << (
 	const std::unordered_multimap<T1, T2> &a_value
 )
 {
-	stdstream::printMap(a_os, "std::unordered_multimap", a_value);
+	stdstream::Print print(a_os);
+	print.map("std::unordered_multimap", a_value);
 
 	return a_os;
 }
@@ -219,7 +233,8 @@ operator << (
 	const std::unordered_set<T> &a_value
 )
 {
-	stdstream::printRange(a_os, "std::unordered_set", a_value.begin(), a_value.end());
+	stdstream::Print print(a_os);
+	print.range("std::unordered_set", a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -231,7 +246,8 @@ operator << (
 	const std::unordered_multiset<T> &a_value
 )
 {
-	stdstream::printRange(a_os, "std::unordered_multiset", a_value.begin(), a_value.end());
+	stdstream::Print print(a_os);
+	print.range("std::unordered_multiset", a_value.begin(), a_value.end());
 
 	return a_os;
 }
@@ -290,97 +306,100 @@ namespace stdstream
 {
 
 //-------------------------------------------------------------------------------------------------
+inline
+Print::Print(
+	std::ostream &a_os ///< [in,out] std::stream
+) :
+	_os{a_os}
+{
+}
+//-------------------------------------------------------------------------------------------------
 template<typename IteratorT>
 inline void
-printTitle(
-	std::ostream      &a_os, 		///< [in,out] std::stream
+Print::title(
 	const std::string &a_contName,	///< container name
     IteratorT          a_first,		///< first iterator
     IteratorT          a_last		///< last iterator
 )
 {
 	const std::size_t valueSize = std::distance(a_first, a_last);
-	a_os << a_contName << " (size=" << valueSize << "): ";
+	_os << a_contName << " (size=" << valueSize << "): ";
 }
 //-------------------------------------------------------------------------------------------------
 template<typename IteratorT>
 inline void
-printRange(
-	std::ostream      &a_os, 		///< [in,out] std::stream
+Print::range(
 	const std::string &a_contName,	///< container name
     IteratorT          a_first,		///< first iterator
     IteratorT          a_last		///< last iterator
 )
 {
 	// titile
-	stdstream::printTitle(a_os, a_contName, a_first, a_last);
+	title(a_contName, a_first, a_last);
 
 	// body
     if (a_first == a_last) {
-        a_os << "{}";
+        _os << "{}";
         return;
     }
 
-    a_os << "{";
-	a_os << *a_first;
+    _os << "{";
+	_os << *a_first;
 
     for (++ a_first; a_first != a_last; ++ a_first) {
-        a_os << ",";
-        a_os << *a_first;
+        _os << ",";
+        _os << *a_first;
     }
 
-    a_os << "}";
+    _os << "}";
 }
 //-------------------------------------------------------------------------------------------------
 template<typename ContT>
 inline void
-printContainer(
-	std::ostream      &a_os, 		///< [in,out] std::stream
+Print::container(
 	const std::string &a_contName,	///< container name
     const ContT       &a_value		///< container
 )
 {
-	stdstream::printRange(a_os, a_contName, a_value.begin(), a_value.end());
+	range(a_contName, a_value.begin(), a_value.end());
 }
 //-------------------------------------------------------------------------------------------------
 template<typename IteratorT>
 inline void
-printRangeMap(
-	std::ostream      &a_os, 		///< [in,out] std::stream
+Print::rangeMap(
 	const std::string &a_contName,	///< container name
     IteratorT          a_first,		///< first iterator
     IteratorT          a_last		///< last iterator
 )
 {
 	// title
-	stdstream::printTitle(a_os, a_contName, a_first, a_last);
+	title(a_contName, a_first, a_last);
 
 	// body
     if (a_first == a_last) {
-        a_os << "{}";
+        _os << "{}";
         return;
     }
 
-    a_os << "{";
-	a_os << *a_first;
+    _os << "{";
+	_os << *a_first;
 
     for (++ a_first; a_first != a_last; ++ a_first) {
-        a_os << "\n";
-        a_os << *a_first;
+        _os << "\n";
+        _os << *a_first;
     }
 
-    a_os << "}";
+    _os << "}";
 }
 //-------------------------------------------------------------------------------------------------
 template<typename MapT>
 inline void
-printMap(
-	std::ostream      &a_os, 		///< [in,out] std::stream
+Print::map(
 	const std::string &a_contName,	///< container name
     const MapT        &a_value		///< container
 )
 {
-	stdstream::printRangeMap(a_os, a_contName, a_value.begin(), a_value.end());
+	rangeMap(a_contName, a_value.begin(), a_value.end());
 }
 //-------------------------------------------------------------------------------------------------
 
