@@ -58,11 +58,10 @@
 	"Invalid " << STD_TRACE_VAR(v)
 #define STD_TRACE_PTR(p) \
 	#p ": " << "{" << (p) << ", " << ((p) ? *(p) : 0) << "}"
-///@}
-
 #define STD_TITLE_VAR(v) \
 	"::::: " << (v) << " :::::"
 	///< trace variable as titlebar
+///@}
 //-------------------------------------------------------------------------------------------------
 #define STD_TRACE_POINT \
     { \
