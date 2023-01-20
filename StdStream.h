@@ -155,7 +155,7 @@ class Print final
 public:
 ///\name ctors, dtor
 ///\{
-	explicit Print(std::ostream &os);
+	Print(const std::string &contName, const std::string &delimiter, std::ostream &os);
 	~Print() = default;
 
 	Print() = delete;
@@ -166,23 +166,19 @@ public:
 ///\}
 
 	template<typename IteratorT>
-	void title(const std::string &contName, IteratorT first, IteratorT last);
+	void title(IteratorT first, IteratorT last);
 			///< contatiner title (name)
 	template<typename IteratorT>
-	void range(const std::string &contName, IteratorT first, IteratorT last);
+	void range(IteratorT first, IteratorT last);
 			///< container's range
 	template<typename ContT>
-	void container(const std::string &contName, const ContT &cont);
+	void container(const ContT &cont);
 			///< all container
 
-	template<typename IteratorT>
-	void rangeMap(const std::string &contName, IteratorT first, IteratorT last);
-			///< map's range
-	template<typename MapT>
-	void map(const std::string &contName, const MapT &cont);
-			///< all map
-
 private:
+	const std::string _contName;
+	const std::string _delimiter;
+
 	std::ostream &_os;
 };
 //-------------------------------------------------------------------------------------------------
