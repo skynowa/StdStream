@@ -215,7 +215,7 @@ operator << (
 {
 	/// stdstream::Print print("std::forward_list", ",", a_os);
 	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
-	print.range(a_value.cbegin(), a_value.cend());
+	print.container(a_value);
 
 	return a_os;
 }
@@ -257,7 +257,7 @@ operator << (
 {
 	/// stdstream::Print print("std::unordered_set", ",", a_os);
 	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
-	print.range(a_value.cbegin(), a_value.cend());
+	print.container(a_value);
 
 	return a_os;
 }
@@ -271,7 +271,7 @@ operator << (
 {
 	/// stdstream::Print print("std::unordered_multiset", ",", a_os);
 	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
-	print.range(a_value.cbegin(), a_value.cend());
+	print.container(a_value);
 
 	return a_os;
 }
