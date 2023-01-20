@@ -172,7 +172,7 @@ public:
 	void container(const ContT &cont);
 			///< all container
 
-	// static
+public: // static
 	template<typename T>
 	static std::string typeNameDemangle(const T &cont);
 			///< demangled type name
