@@ -153,9 +153,17 @@ class Print final
 	///
 {
 public:
-	Print() = delete;
+///\name ctors, dtor
+///\{
 	Print(std::ostream &os);
 	~Print() = default;
+
+	Print() = delete;
+	Print(const Print &) = delete;
+	Print(Print &&) = delete;
+	Print & operator = (const Print &) = delete;
+	Print & operator = (Print &&) = delete;
+///\}
 
 	template<typename IteratorT>
 	void title(const std::string &contName, IteratorT first, IteratorT last);
