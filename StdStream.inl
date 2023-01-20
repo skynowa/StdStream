@@ -389,7 +389,6 @@ Print::typeNameDemangle(const T &a_cont)
 			&status);
 
 		sRv = (demangledName == nullptr) ? "<unknown>" : demangledName;
-
 		// std::cout << STD_PRINT_VAR(sRv) << std::endl;
 
 		std::free(demangledName);
