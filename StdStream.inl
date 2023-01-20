@@ -361,7 +361,7 @@ Print::_title(
     IteratorT a_last   ///< last iterator
 )
 {
-	const std::size_t valueSize = std::distance(a_first, a_last);
+	const auto valueSize = std::distance(a_first, a_last);
 	_os << _contName << " (size=" << valueSize << "): ";
 }
 //-------------------------------------------------------------------------------------------------
