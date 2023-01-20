@@ -435,8 +435,9 @@ Print::typeNameDemangle(
 
 		std::free(pszRv);
 		pszRv = nullptr;
+	#elif defined(_MSC_VER)
+		demangledName = (typeName == nullptr) ? "<unknown>" : typeName;
 	#else
-		// _MSC_VER, ...
 		demangledName = (typeName == nullptr) ? "<unknown>" : typeName;
 	#endif
 	}
