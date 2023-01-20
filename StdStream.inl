@@ -309,10 +309,12 @@ operator << (
 	const std::tuple<ArgsT...> &a_value
 )
 {
+	// title
 	const std::size_t valueSize = sizeof...(ArgsT);
 	/// a_os << "std::tuple" << " (size=" << valueSize << "): ";
 	a_os << stdstream::Print::typeNameDemangle(a_value) << " (size=" << valueSize << "): ";
 
+	// body
 	if (valueSize == 0) {
         a_os << "{}";
 		return a_os;
@@ -355,7 +357,7 @@ Print::range(
     IteratorT a_last   ///< last iterator
 )
 {
-	// titile
+	// title
 	_title(a_first, a_last);
 
 	// body
@@ -390,7 +392,7 @@ Print::container(
 	const std::pair<T1, T2> &a_cont ///< container
 )
 {
-	// titile
+	// title
 	_os << _contName << ": ";
 
 	// body
