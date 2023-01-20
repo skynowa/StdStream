@@ -29,7 +29,10 @@ operator << (
 	const std::pair<T1, T2> &a_value
 )
 {
-	a_os << "std::pair: {" << a_value.first  << "," << a_value.second << "}";	/// Delimiter ???
+	/// a_os << "std::pair: {" << a_value.first  << "," << a_value.second << "}";	/// Delimiter ???
+	a_os
+		<< stdstream::Print::typeNameDemangle(a_value) << ": "
+		<< "{" << a_value.first  << "," << a_value.second << "}";	/// Delimiter ???
 
 	return a_os;
 }
@@ -55,7 +58,8 @@ operator << (
 	const std::list<T> &a_value
 )
 {
-	stdstream::Print print("std::list", ",", a_os);
+	/// stdstream::Print print("std::list", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -68,7 +72,8 @@ operator << (
 	const std::set<T> &a_value
 )
 {
-	stdstream::Print print("std::set", ",", a_os);
+	/// stdstream::Print print("std::set", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -81,7 +86,8 @@ operator << (
 	const std::multiset<T> &a_value
 )
 {
-	stdstream::Print print("std::multiset", ",", a_os);
+	/// stdstream::Print print("std::multiset", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -94,7 +100,8 @@ operator << (
 	const std::deque<T> &a_value
 )
 {
-	stdstream::Print print("std::deque", ",", a_os);
+	/// stdstream::Print print("std::deque", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -112,7 +119,8 @@ operator << (
     const_iterator it_cbegin = &a_value.front();
     const_iterator it_cend   = &a_value.front() + a_value.size();
 
-    stdstream::Print print("std::queue", ",", a_os);
+    /// stdstream::Print print("std::queue", ",", a_os);
+    stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
     print.range(it_cbegin, it_cend);
 
 	return a_os;
@@ -130,7 +138,8 @@ operator << (
     const_iterator it_cbegin = &a_value.top();
     const_iterator it_cend   = &a_value.top() + a_value.size();
 
-    stdstream::Print print("std::priority_queue", ",", a_os);
+    /// stdstream::Print print("std::priority_queue", ",", a_os);
+    stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
     print.range(it_cbegin, it_cend);
 
 	return a_os;
@@ -148,7 +157,8 @@ operator << (
     const_iterator it_cbegin = &a_value.top() - a_value.size() + 1;
     const_iterator it_cend   = &a_value.top() + 1;
 
-    stdstream::Print print("std::stack", ",", a_os);
+    /// stdstream::Print print("std::stack", ",", a_os);
+    stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
     print.range(it_cbegin, it_cend);
 
 	return a_os;
@@ -175,7 +185,8 @@ operator << (
 	const std::multimap<T1, T2, CompareT> &a_value
 )
 {
-	stdstream::Print print("std::multimap", "\n", a_os);
+	/// stdstream::Print print("std::multimap", "\n", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), "\n", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -188,7 +199,8 @@ operator << (
 	const std::array<T, N> &a_value
 )
 {
-	stdstream::Print print("std::array", ",", a_os);
+	/// stdstream::Print print("std::array", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -201,7 +213,8 @@ operator << (
 	const std::forward_list<T> &a_value
 )
 {
-	stdstream::Print print("std::forward_list", ",", a_os);
+	/// stdstream::Print print("std::forward_list", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
 	print.range(a_value.cbegin(), a_value.cend());
 
 	return a_os;
@@ -214,7 +227,8 @@ operator << (
 	const std::unordered_map<T1, T2> &a_value
 )
 {
-	stdstream::Print print("std::unordered_map", "\n", a_os);
+	/// stdstream::Print print("std::unordered_map", "\n", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), "\n", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -227,7 +241,8 @@ operator << (
 	const std::unordered_multimap<T1, T2> &a_value
 )
 {
-	stdstream::Print print("std::unordered_multimap", "\n", a_os);
+	/// stdstream::Print print("std::unordered_multimap", "\n", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), "\n", a_os);
 	print.container(a_value);
 
 	return a_os;
@@ -240,7 +255,8 @@ operator << (
 	const std::unordered_set<T> &a_value
 )
 {
-	stdstream::Print print("std::unordered_set", ",", a_os);
+	/// stdstream::Print print("std::unordered_set", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
 	print.range(a_value.cbegin(), a_value.cend());
 
 	return a_os;
@@ -253,7 +269,8 @@ operator << (
 	const std::unordered_multiset<T> &a_value
 )
 {
-	stdstream::Print print("std::unordered_multiset", ",", a_os);
+	/// stdstream::Print print("std::unordered_multiset", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
 	print.range(a_value.cbegin(), a_value.cend());
 
 	return a_os;
@@ -266,7 +283,7 @@ struct TuplePrinter
 	print(std::ostream &a_os, const TupleT &a_t)
 	{
 		TuplePrinter<TupleT, N - 1>::print(a_os, a_t);
-		a_os << "," << std::get<N - 1>(a_t);
+		a_os << "," << std::get<N - 1>(a_t);	/// Delimiter ???
 	}
 };
 
@@ -288,7 +305,8 @@ operator << (
 )
 {
 	const std::size_t valueSize = sizeof...(ArgsT);
-	a_os << "std::tuple" << " (size=" << valueSize << "): ";
+	/// a_os << "std::tuple" << " (size=" << valueSize << "): ";
+	a_os << stdstream::Print::typeNameDemangle(a_value) << " (size=" << valueSize << "): ";
 
 	if (valueSize == 0) {
         a_os << "{}";
@@ -408,6 +426,16 @@ Print::typeNameDemangle(
 		{
 			demangledNameCustom += demangledName.substr(0, posBegin);
 			demangledNameCustom += demangledName.substr(posEnd + 1);
+		}
+	}
+
+	// std::__cxx11::list -> std::list
+	{
+		const std::string cxxStr = "__cxx11::";
+
+		const auto pos = demangledNameCustom.find(cxxStr);
+		if (pos != std::string::npos) {
+			demangledNameCustom.erase(pos, cxxStr.size());
 		}
 	}
 
