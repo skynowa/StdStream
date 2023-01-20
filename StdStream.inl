@@ -29,10 +29,15 @@ operator << (
 	const std::pair<T1, T2> &a_value
 )
 {
+#if 0
 	/// a_os << "std::pair: {" << a_value.first  << "," << a_value.second << "}";	/// Delimiter ???
 	a_os
 		<< stdstream::Print::typeNameDemangle(a_value) << ": "
 		<< "{" << a_value.first  << "," << a_value.second << "}";	/// Delimiter ???
+#else
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
+	print.container(a_value);
+#endif
 
 	return a_os;
 }
@@ -377,6 +382,19 @@ Print::container(
 )
 {
 	range(a_value.cbegin(), a_value.cend());
+}
+//-------------------------------------------------------------------------------------------------
+template<typename T1, typename T2>
+inline void
+Print::container(
+	const std::pair<T1, T2> &a_value ///< container
+)
+{
+	// titile
+	_os << _contName << ": ";
+
+	// body
+	_os << "{" << a_value.first  << _delimiter << a_value.second << "}";
 }
 //-------------------------------------------------------------------------------------------------
 template<typename IteratorT>

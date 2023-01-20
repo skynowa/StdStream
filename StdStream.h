@@ -171,6 +171,9 @@ public:
 	template<typename ContT>
 	void container(const ContT &cont);
 			///< all container
+	template<typename T1, typename T2>
+	void container(const std::pair<T1, T2> &cont);
+			///< std::pair
 
 public: // static
 	template<typename T>
