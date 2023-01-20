@@ -374,9 +374,11 @@ Print::_title(
 //-------------------------------------------------------------------------------------------------
 template<typename T>
 std::string
-Print::typeNameDemangle(const T &a_cont)
+Print::typeNameDemangle(
+	const T &a_value ///< container
+)
 {
-	const char * const typeName = typeid( decltype(a_cont) ).name();
+	const char * const typeName = typeid( decltype(a_value) ).name();
 
 	std::string demangledName;
 	{
