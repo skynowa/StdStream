@@ -166,9 +166,6 @@ public:
 ///\}
 
 	template<typename IteratorT>
-	void title(IteratorT first, IteratorT last);
-			///< contatiner title (name)
-	template<typename IteratorT>
 	void range(IteratorT first, IteratorT last);
 			///< container's range
 	template<typename ContT>
@@ -180,6 +177,10 @@ private:
 	const std::string _delimiter;
 
 	std::ostream &_os;
+
+	template<typename IteratorT>
+	void _title(IteratorT first, IteratorT last);
+			///< contatiner title (name)
 };
 //-------------------------------------------------------------------------------------------------
 

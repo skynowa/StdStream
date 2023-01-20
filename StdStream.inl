@@ -320,24 +320,13 @@ Print::Print(
 //-------------------------------------------------------------------------------------------------
 template<typename IteratorT>
 inline void
-Print::title(
-    IteratorT a_first, ///< first iterator
-    IteratorT a_last   ///< last iterator
-)
-{
-	const std::size_t valueSize = std::distance(a_first, a_last);
-	_os << _contName << " (size=" << valueSize << "): ";
-}
-//-------------------------------------------------------------------------------------------------
-template<typename IteratorT>
-inline void
 Print::range(
     IteratorT a_first, ///< first iterator
     IteratorT a_last   ///< last iterator
 )
 {
 	// titile
-	title(a_first, a_last);
+	_title(a_first, a_last);
 
 	// body
     if (a_first == a_last) {
@@ -363,6 +352,17 @@ Print::container(
 )
 {
 	range(a_value.cbegin(), a_value.cend());
+}
+//-------------------------------------------------------------------------------------------------
+template<typename IteratorT>
+inline void
+Print::_title(
+    IteratorT a_first, ///< first iterator
+    IteratorT a_last   ///< last iterator
+)
+{
+	const std::size_t valueSize = std::distance(a_first, a_last);
+	_os << _contName << " (size=" << valueSize << "): ";
 }
 //-------------------------------------------------------------------------------------------------
 
