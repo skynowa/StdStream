@@ -155,7 +155,7 @@ class Print final
 public:
 ///\name ctors, dtor
 ///\{
-	Print(std::ostream &os);
+	explicit Print(std::ostream &os);
 	~Print() = default;
 
 	Print() = delete;
