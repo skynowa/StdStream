@@ -5,10 +5,12 @@
 
 
 //-------------------------------------------------------------------------------------------------
-#if defined(__GNUC__) || defined(__MINGW32__) || defined(__MINGW64__)
+#if defined(__GNUC__) || \
+	defined(__MINGW32__) || defined(__MINGW64__) || \
+	defined(__clang__)
+
     #include <cxxabi.h>
 #endif
-
 //-------------------------------------------------------------------------------------------------
 template<class T>
 inline auto
@@ -310,7 +312,7 @@ operator << (
 )
 {
 	// title
-	const std::size_t valueSize = sizeof...(ArgsT);
+	constexpr std::size_t valueSize = sizeof...(ArgsT);
 	/// a_os << "std::tuple" << " (size=" << valueSize << "): ";
 	a_os << stdstream::Print::typeNameDemangle(a_value) << " (size=" << valueSize << "): ";
 
@@ -420,7 +422,10 @@ Print::typeNameDemangle(
 
 	std::string demangledName;
 	{
-	#if defined(__GNUC__) || defined(__MINGW32__) || defined(__MINGW64__)
+	#if defined(__GNUC__) || \
+		defined(__MINGW32__) || defined(__MINGW64__) || \
+		defined(__clang__)
+
 		char        *buff   {};
 		std::size_t *length {};
 		int          status {- 1};
@@ -431,13 +436,14 @@ Print::typeNameDemangle(
 		std::free(pszRv);
 		pszRv = nullptr;
 	#else
+		// _MSC_VER, ...
 		demangledName = (typeName == nullptr) ? "<unknown>" : typeName;
 	#endif
 	}
 
 	std::string demangledNameCustom;
 
-	// Template's info - remove (pair<int, int> -> pair)
+	// Template's huge info - remove (pair<int, int> -> pair)
 	{
 		const auto posBegin = demangledName.find("<");
 		const auto posEnd   = demangledName.rfind(">");
