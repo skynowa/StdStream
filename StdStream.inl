@@ -109,11 +109,11 @@ operator << (
 {
 	using const_iterator = const T *;
 
-    const_iterator it_begin = &a_value.front();
-    const_iterator it_end   = &a_value.front() + a_value.size();
+    const_iterator it_cbegin = &a_value.front();
+    const_iterator it_cend   = &a_value.front() + a_value.size();
 
     stdstream::Print print("std::queue", ",", a_os);
-    print.range(it_begin, it_end);
+    print.range(it_cbegin, it_cend);
 
 	return a_os;
 }
@@ -127,11 +127,11 @@ operator << (
 {
     using const_iterator = const T *;
 
-    const_iterator it_begin = &a_value.top();
-    const_iterator it_end   = &a_value.top() + a_value.size();
+    const_iterator it_cbegin = &a_value.top();
+    const_iterator it_cend   = &a_value.top() + a_value.size();
 
     stdstream::Print print("std::priority_queue", ",", a_os);
-    print.range(it_begin, it_end);
+    print.range(it_cbegin, it_cend);
 
 	return a_os;
 }
@@ -145,11 +145,11 @@ operator << (
 {
 	using const_iterator = const T *;
 
-    const_iterator it_begin = &a_value.top() - a_value.size() + 1;
-    const_iterator it_end   = &a_value.top() + 1;
+    const_iterator it_cbegin = &a_value.top() - a_value.size() + 1;
+    const_iterator it_cend   = &a_value.top() + 1;
 
     stdstream::Print print("std::stack", ",", a_os);
-    print.range(it_begin, it_end);
+    print.range(it_cbegin, it_cend);
 
 	return a_os;
 }
@@ -162,7 +162,7 @@ operator << (
 )
 {
 	/// stdstream::Print print("std::map", "\n", a_os);
-	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value) + "-xxxxx", "\n", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), "\n", a_os);
 	print.container(a_value);
 
 	return a_os;
