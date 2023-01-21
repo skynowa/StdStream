@@ -7,24 +7,6 @@
 #pragma once
 
 //-------------------------------------------------------------------------------------------------
-#include <iostream>
-#include <sstream>
-#include <typeinfo>
-#include <algorithm>
-#include <type_traits>
-#include <vector>
-#include <list>
-#include <map>
-#include <tuple>
-#include <queue>
-#include <set>
-#include <stack>
-#include <array>
-#include <forward_list>
-#include <initializer_list>
-#include <unordered_map>
-#include <unordered_set>
-//-------------------------------------------------------------------------------------------------
 namespace stdstream
 {
 
