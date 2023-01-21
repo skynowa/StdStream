@@ -11,5 +11,7 @@ install(
 	FILES
 		StdStream.h
 		StdStream.inl
+		Print.h
+		Print.inl
 	DESTINATION
 		include/StdStream)

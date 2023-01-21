@@ -9,8 +9,9 @@
 //-------------------------------------------------------------------------------------------------
 #include <iostream>
 #include <sstream>
-#include <algorithm>
+#include <typeinfo>
 #include <type_traits>
+#include <algorithm>
 #include <vector>
 #include <list>
 #include <map>
@@ -144,23 +145,5 @@ std::ostream & operator << (std::ostream &os, const std::unordered_multiset<T> &
 
 template<typename... Args>
 std::ostream & operator << (std::ostream &os, const std::tuple<Args...> &value);
-//-------------------------------------------------------------------------------------------------
-namespace stdstream
-{
-
-template<typename IteratorT>
-void printTitle(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
-
-template<typename IteratorT>
-void printRange(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
-template<typename ContT>
-void printContainer(std::ostream &os, const std::string &contName, const ContT &cont);
-
-template<typename IteratorT>
-void printRangeMap(std::ostream &os, const std::string &contName, IteratorT first, IteratorT last);
-template<typename MapT>
-void printMap(std::ostream &os, const std::string &contName, const MapT &cont);
-
-}
 //-------------------------------------------------------------------------------------------------
 #include "StdStream.inl"
