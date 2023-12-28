@@ -25,8 +25,8 @@
 #include <unordered_map>
 #include <unordered_set>
 //-------------------------------------------------------------------------------------------------
-///@name Trace variables (variable with value)
-///@{
+///\name Trace variables (variable with value)
+///\{
 #define STD_TRACE_VAR(v1) \
 	#v1 ": " << (v1)
 #define STD_TRACE_VAR2(v1, v2) \
@@ -49,7 +49,10 @@
 	STD_TRACE_VAR9(v1, v2, v3, v4, v5, v6, v7, v8, v9) << ", " << STD_TRACE_VAR(v10)
 #define STD_TRACE_VAR11(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11) \
 	STD_TRACE_VAR10(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10) << ", " << STD_TRACE_VAR(v11)
+///\}
 
+///\name Trace variables with label
+///\{
 #define STD_PRINT_VAR(v) \
 	#v ": [" << (v) << "]"
 	///< trace variable with delimiters ("[var]")
@@ -66,7 +69,7 @@
 	"+------------------------------+\n" << \
 	"| " << STD_TRACE_VAR(v)    << " \n" << \
 	"+------------------------------+\n"
-///@}
+///\}
 //-------------------------------------------------------------------------------------------------
 #define STD_TRACE_POINT \
     { \
