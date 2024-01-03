@@ -86,6 +86,13 @@
         std::cout << "\t::: " << __FUNCTION__ << " :::" << std::endl; \
     }
     ///< trace function
+#define STD_NOT_IMPLEMENTED \
+    { \
+		std::cout \
+			<< "[STD_NOT_IMPLEMENTED] " << __FILE__ << ": " << __LINE__ << ", " \
+			<< __FUNCTION__ << " - " << "Not implemented" << ")" << std::endl; \
+    }
+    ///< show not implemented message
 //-------------------------------------------------------------------------------------------------
 
 
