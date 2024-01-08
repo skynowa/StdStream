@@ -86,9 +86,9 @@
         std::cout << "\t::: " << __FUNCTION__ << " :::" << std::endl; \
     }
     ///< trace function
-#define STD_TRACE_FUNC_2 \
+#define STD_TRACE_FUNC_PRETTY \
     { \
-        std::cout << "\t::: " << __FUNC__ << " :::" << std::endl; \
+        std::cout << "\t::: " << __PRETTY_FUNCTION__ << " :::" << std::endl; \
     }
     ///< trace function
 #define STD_NOT_IMPLEMENTED \
