@@ -98,6 +98,13 @@
 			<< __FUNCTION__ << " - " << "Not implemented" << ")" << std::endl; \
     }
     ///< show not implemented message
+#define xTRACE_NOT_SUPPORTED \
+    { \
+		std::cout \
+			<< "[STD_NOT_SUPPORTED] " << __FILE__ << ": " << __LINE__ << ", " \
+			<< __FUNCTION__ << " - " << "Not supported" << ")" << std::endl; \
+    }
+    ///< show not supported message
 //-------------------------------------------------------------------------------------------------
 
 
