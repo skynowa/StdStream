@@ -22,12 +22,30 @@ int main(int, char **)
 		std::cout << value << std::endl << std::endl;
 	}
 
+	// std::queue with non-default container
+	{
+		std::queue<std::string, std::list<std::string>> value;
+		value.push("aaa");
+		value.push("bbb");
+		value.push("ccc");
+		std::cout << value << std::endl << std::endl;
+	}
+
 	// std::vector
 	{
 		std::vector<std::string> value;
 		std::cout << value << std::endl;
 
 		value = {"aaa", "bbb", "ccc"};
+		std::cout << value << std::endl << std::endl;
+	}
+
+	// std::stack with non-default container
+	{
+		std::stack<std::string, std::vector<std::string>> value;
+		value.push("aaa");
+		value.push("bbb");
+		value.push("ccc");
 		std::cout << value << std::endl << std::endl;
 	}
 
@@ -105,6 +123,21 @@ int main(int, char **)
 		std::map<std::string, std::string> value;
 		std::cout << value << std::endl;
 
+		value = {{"aaa", "000"}, {"bbb", "111"}};
+		std::cout << value << std::endl << std::endl;
+	}
+
+	// std::unordered_map with custom hash
+	{
+		struct StringHash
+		{
+			std::size_t operator () (const std::string &value) const
+			{
+				return std::hash<std::string>()(value);
+			}
+		};
+
+		std::unordered_map<std::string, std::string, StringHash> value;
 		value = {{"aaa", "000"}, {"bbb", "111"}};
 		std::cout << value << std::endl << std::endl;
 	}
@@ -188,6 +221,18 @@ int main(int, char **)
 
 		value = std::make_tuple("test", 3.1, 14, 'y');
 		std::cout << value << std::endl << std::endl;
+	}
+
+	// std::tuple - empty
+	{
+		std::tuple<> value;
+		std::cout << value << std::endl << std::endl;
+	}
+
+	// STD_TRACE_PTR - null non-arithmetic pointer
+	{
+		std::string *value {};
+		std::cout << STD_TRACE_PTR(value) << std::endl << std::endl;
 	}
 
     return EXIT_SUCCESS;

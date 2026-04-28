@@ -7,6 +7,13 @@
 #pragma once
 
 //-------------------------------------------------------------------------------------------------
+#include <cstdlib>
+#include <iterator>
+#include <ostream>
+#include <string>
+#include <typeinfo>
+#include <utility>
+//-------------------------------------------------------------------------------------------------
 namespace stdstream
 {
 
@@ -49,6 +56,12 @@ private:
 	template<typename IteratorT>
 	void _title(IteratorT first, IteratorT last);
 			///< contatiner title (name)
+	template<typename ValueT>
+	void _item(const ValueT &value);
+			///< container item
+	template<typename T1, typename T2>
+	void _item(const std::pair<T1, T2> &value);
+			///< std::pair item
 };
 
 } // ns stdstream

@@ -39,11 +39,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream         &a_os,
-	const std::vector<T> &a_value
+	std::ostream                 &a_os,
+	const std::vector<T, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::vector", ",", a_os);
@@ -53,11 +53,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream       &a_os,
-	const std::list<T> &a_value
+	std::ostream               &a_os,
+	const std::list<T, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::list", ",", a_os);
@@ -67,11 +67,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename CompareT, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream      &a_os,
-	const std::set<T> &a_value
+	std::ostream                         &a_os,
+	const std::set<T, CompareT, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::set", ",", a_os);
@@ -81,11 +81,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename CompareT, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream           &a_os,
-	const std::multiset<T> &a_value
+	std::ostream                              &a_os,
+	const std::multiset<T, CompareT, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::multiset", ",", a_os);
@@ -95,11 +95,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream        &a_os,
-	const std::deque<T> &a_value
+	std::ostream                &a_os,
+	const std::deque<T, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::deque", ",", a_os);
@@ -109,68 +109,82 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename ContT>
 inline std::ostream &
 operator << (
-	std::ostream        &a_os,
-	const std::queue<T> &a_value
+	std::ostream               &a_os,
+	const std::queue<T, ContT> &a_value
 )
 {
-	using const_iterator = const T *;
+	std::vector<T> values;
+	values.reserve(a_value.size());
 
-    const_iterator it_cbegin = &a_value.front();
-    const_iterator it_cend   = &a_value.front() + a_value.size();
+	auto copy = a_value;
+	while ( !copy.empty() ) {
+		values.push_back(copy.front());
+		copy.pop();
+	}
 
-    /// stdstream::Print print("std::queue", ",", a_os);
-    stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
-    print.range(it_cbegin, it_cend);
+	/// stdstream::Print print("std::queue", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
+	print.container(values);
 
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename ContT, typename CompareT>
 inline std::ostream &
 operator << (
-	std::ostream                 &a_os,
-	const std::priority_queue<T> &a_value
+	std::ostream                                &a_os,
+	const std::priority_queue<T, ContT, CompareT> &a_value
 )
 {
-    using const_iterator = const T *;
+	std::vector<T> values;
+	values.reserve(a_value.size());
 
-    const_iterator it_cbegin = &a_value.top();
-    const_iterator it_cend   = &a_value.top() + a_value.size();
+	auto copy = a_value;
+	while ( !copy.empty() ) {
+		values.push_back(copy.top());
+		copy.pop();
+	}
 
-    /// stdstream::Print print("std::priority_queue", ",", a_os);
-    stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
-    print.range(it_cbegin, it_cend);
+	/// stdstream::Print print("std::priority_queue", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
+	print.container(values);
 
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename ContT>
 inline std::ostream &
 operator << (
-	std::ostream        &a_os,
-	const std::stack<T> &a_value
+	std::ostream               &a_os,
+	const std::stack<T, ContT> &a_value
 )
 {
-	using const_iterator = const T *;
+	std::vector<T> values;
+	values.reserve(a_value.size());
 
-    const_iterator it_cbegin = &a_value.top() - a_value.size() + 1;
-    const_iterator it_cend   = &a_value.top() + 1;
+	auto copy = a_value;
+	while ( !copy.empty() ) {
+		values.push_back(copy.top());
+		copy.pop();
+	}
 
-    /// stdstream::Print print("std::stack", ",", a_os);
-    stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
-    print.range(it_cbegin, it_cend);
+	std::reverse(values.begin(), values.end());
+
+	/// stdstream::Print print("std::stack", ",", a_os);
+	stdstream::Print print(stdstream::Print::typeNameDemangle(a_value), ",", a_os);
+	print.container(values);
 
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T1, typename T2, class CompareT>
+template<typename T1, typename T2, class CompareT, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream                     &a_os,
-	const std::map<T1, T2, CompareT> &a_value
+	std::ostream                             &a_os,
+	const std::map<T1, T2, CompareT, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::map", "\n", a_os);
@@ -180,11 +194,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T1, typename T2, class CompareT>
+template<typename T1, typename T2, class CompareT, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream                          &a_os,
-	const std::multimap<T1, T2, CompareT> &a_value
+	std::ostream                                  &a_os,
+	const std::multimap<T1, T2, CompareT, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::multimap", "\n", a_os);
@@ -208,11 +222,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream               &a_os,
-	const std::forward_list<T> &a_value
+	std::ostream                       &a_os,
+	const std::forward_list<T, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::forward_list", ",", a_os);
@@ -222,11 +236,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T1, typename T2>
+template<typename T1, typename T2, typename HashT, typename KeyEqualT, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream                     &a_os,
-	const std::unordered_map<T1, T2> &a_value
+	std::ostream                                                   &a_os,
+	const std::unordered_map<T1, T2, HashT, KeyEqualT, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::unordered_map", "\n", a_os);
@@ -236,11 +250,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T1, typename T2>
+template<typename T1, typename T2, typename HashT, typename KeyEqualT, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream                          &a_os,
-	const std::unordered_multimap<T1, T2> &a_value
+	std::ostream                                                        &a_os,
+	const std::unordered_multimap<T1, T2, HashT, KeyEqualT, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::unordered_multimap", "\n", a_os);
@@ -250,11 +264,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename HashT, typename KeyEqualT, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream                &a_os,
-	const std::unordered_set<T> &a_value
+	std::ostream                                             &a_os,
+	const std::unordered_set<T, HashT, KeyEqualT, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::unordered_set", ",", a_os);
@@ -264,11 +278,11 @@ operator << (
 	return a_os;
 }
 //-------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename HashT, typename KeyEqualT, typename AllocT>
 inline std::ostream &
 operator << (
-	std::ostream                     &a_os,
-	const std::unordered_multiset<T> &a_value
+	std::ostream                                                  &a_os,
+	const std::unordered_multiset<T, HashT, KeyEqualT, AllocT> &a_value
 )
 {
 	/// stdstream::Print print("std::unordered_multiset", ",", a_os);
@@ -312,14 +326,14 @@ operator << (
 	a_os << stdstream::Print::typeNameDemangle(a_value) << " (size=" << valueSize << "): ";
 
 	// body
-	if (valueSize == 0) {
+	if constexpr (valueSize == 0) {
         a_os << "{}";
 		return a_os;
+	} else {
+		a_os << "{";
+		TuplePrinter<decltype(a_value), sizeof...(ArgsT)>::print(a_os, a_value);
+		a_os << "}";
 	}
-
-	a_os << "{";
-	TuplePrinter<decltype(a_value), sizeof...(ArgsT)>::print(a_os, a_value);
-	a_os << "}";
 
 	return a_os;
 }

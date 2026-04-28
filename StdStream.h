@@ -7,6 +7,8 @@
 #pragma once
 
 //-------------------------------------------------------------------------------------------------
+#include <cerrno>
+#include <cstring>
 #include <iostream>
 #include <sstream>
 #include <typeinfo>
@@ -24,6 +26,49 @@
 #include <initializer_list>
 #include <unordered_map>
 #include <unordered_set>
+//-------------------------------------------------------------------------------------------------
+namespace stdstream
+{
+
+template<typename T>
+class TracePtrValue final
+{
+public:
+	explicit TracePtrValue(const T *ptr) :
+		_ptr {ptr}
+	{
+	}
+
+	std::ostream & print(std::ostream &os) const
+	{
+		if (_ptr == nullptr) {
+			os << "nullptr";
+		} else {
+			os << *_ptr;
+		}
+
+		return os;
+	}
+
+private:
+	const T *_ptr {};
+};
+
+template<typename T>
+TracePtrValue<T>
+tracePtrValue(const T *ptr)
+{
+	return TracePtrValue<T>(ptr);
+}
+
+template<typename T>
+std::ostream &
+operator << (std::ostream &os, const TracePtrValue<T> &value)
+{
+	return value.print(os);
+}
+
+} // namespace stdstream
 //-------------------------------------------------------------------------------------------------
 ///\name Trace variables (variable with value)
 ///\{
@@ -61,7 +106,7 @@
 #define STD_INVALID_VAR(v) \
 	"Invalid " << STD_TRACE_VAR(v)
 #define STD_TRACE_PTR(p) \
-	#p ": " << "{" << (p) << ", " << ((p) ? *(p) : 0) << "}"
+	#p ": " << "{" << static_cast<const void *>(p) << ", " << stdstream::tracePtrValue(p) << "}"
 #define STD_TITLE_VAR(v) \
 	"::::: " << (v) << " :::::"
 	///< trace variable as titlebar
@@ -121,53 +166,53 @@ auto operator << (std::ostream &os, const T &value) -> decltype(value.print(os),
 template<typename T1, typename T2>
 std::ostream & operator << (std::ostream &os, const std::pair<T1, T2> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::vector<T> &value);
+template<typename T, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::vector<T, AllocT> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::list<T> &value);
+template<typename T, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::list<T, AllocT> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::set<T> &value);
+template<typename T, typename CompareT, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::set<T, CompareT, AllocT> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::multiset<T> &value);
+template<typename T, typename CompareT, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::multiset<T, CompareT, AllocT> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::deque<T> &value);
+template<typename T, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::deque<T, AllocT> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::queue<T> &value);
+template<typename T, typename ContT>
+std::ostream & operator << (std::ostream &os, const std::queue<T, ContT> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::priority_queue<T> &value);
+template<typename T, typename ContT, typename CompareT>
+std::ostream & operator << (std::ostream &os, const std::priority_queue<T, ContT, CompareT> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::stack<T> &value);
+template<typename T, typename ContT>
+std::ostream & operator << (std::ostream &os, const std::stack<T, ContT> &value);
 
-template<typename T1, typename T2, class CompareT>
-std::ostream & operator << (std::ostream &os, const std::map<T1, T2, CompareT> &value);
+template<typename T1, typename T2, class CompareT, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::map<T1, T2, CompareT, AllocT> &value);
 
-template<typename T1, typename T2, class CompareT>
-std::ostream & operator << (std::ostream &os, const std::multimap<T1, T2> &value);
+template<typename T1, typename T2, class CompareT, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::multimap<T1, T2, CompareT, AllocT> &value);
 
 template<typename T, std::size_t N>
 std::ostream & operator << (std::ostream &os, const std::array<T, N> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::forward_list<T> &value);
+template<typename T, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::forward_list<T, AllocT> &value);
 
-template<typename T1, typename T2>
-std::ostream & operator << (std::ostream &os, const std::unordered_map<T1, T2> &value);
+template<typename T1, typename T2, typename HashT, typename KeyEqualT, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::unordered_map<T1, T2, HashT, KeyEqualT, AllocT> &value);
 
-template<typename T1, typename T2>
-std::ostream & operator << (std::ostream &os, const std::unordered_multimap<T1, T2> &value);
+template<typename T1, typename T2, typename HashT, typename KeyEqualT, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::unordered_multimap<T1, T2, HashT, KeyEqualT, AllocT> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::unordered_set<T> &value);
+template<typename T, typename HashT, typename KeyEqualT, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::unordered_set<T, HashT, KeyEqualT, AllocT> &value);
 
-template<typename T>
-std::ostream & operator << (std::ostream &os, const std::unordered_multiset<T> &value);
+template<typename T, typename HashT, typename KeyEqualT, typename AllocT>
+std::ostream & operator << (std::ostream &os, const std::unordered_multiset<T, HashT, KeyEqualT, AllocT> &value);
 
 template<typename... Args>
 std::ostream & operator << (std::ostream &os, const std::tuple<Args...> &value);
