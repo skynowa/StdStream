@@ -7,6 +7,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wformat")
 
 add_executable(StdStream_Test StdStream_Test.cpp)
 
+enable_testing()
+add_test(NAME StdStream_Test COMMAND StdStream_Test)
+
 install(
 	FILES
 		StdStream.h

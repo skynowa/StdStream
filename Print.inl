@@ -44,11 +44,11 @@ Print::range(
     }
 
     _os << "{";
-	_os << *a_first;
+	_item(*a_first);
 
     for (++ a_first; a_first != a_last; ++ a_first) {
         _os << _delimiter;
-        _os << *a_first;
+        _item(*a_first);
     }
 
     _os << "}";
@@ -85,6 +85,25 @@ Print::_title(
 {
 	const auto valueSize = std::distance(a_first, a_last);
 	_os << _contName << " (size=" << valueSize << "): ";
+}
+//-------------------------------------------------------------------------------------------------
+template<typename ValueT>
+inline void
+Print::_item(
+	const ValueT &a_value ///< value
+)
+{
+	_os << a_value;
+}
+//-------------------------------------------------------------------------------------------------
+template<typename T1, typename T2>
+inline void
+Print::_item(
+	const std::pair<T1, T2> &a_value ///< value
+)
+{
+	_os << typeNameDemangle(a_value) << ": ";
+	_os << "{" << a_value.first << "," << a_value.second << "}";
 }
 //-------------------------------------------------------------------------------------------------
 template<typename T>
