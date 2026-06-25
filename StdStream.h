@@ -62,6 +62,13 @@ tracePtrValue(const T *ptr)
 }
 
 template<typename T>
+const void *
+tracePtrAddress(const volatile T *ptr)
+{
+	return const_cast<const void *>(static_cast<const volatile void *>(ptr));
+}
+
+template<typename T>
 std::ostream &
 operator << (std::ostream &os, const TracePtrValue<T> &value)
 {
@@ -106,7 +113,7 @@ operator << (std::ostream &os, const TracePtrValue<T> &value)
 #define STD_INVALID_VAR(v) \
 	"Invalid " << STD_TRACE_VAR(v)
 #define STD_TRACE_PTR(p) \
-	#p ": " << "{" << static_cast<const void *>(p) << ", " << stdstream::tracePtrValue(p) << "}"
+	#p ": " << "{" << stdstream::tracePtrAddress(p) << ", " << stdstream::tracePtrValue(p) << "}"
 #define STD_TITLE_VAR(v) \
 	"::::: " << (v) << " :::::"
 	///< trace variable as titlebar
