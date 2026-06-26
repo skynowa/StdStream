@@ -11,14 +11,14 @@
 
 #include "StdStream.h"
 //-------------------------------------------------------------------------------------------------
-#define TEST(expr)                                                   \
-	do {                                                              \
-		if (!(expr)) {                                                \
-			std::cerr << "TEST failed: " #expr                        \
-					  << "\nFile: " << __FILE__                      \
-					  << "\nLine: " << __LINE__ << '\n';             \
-			std::abort();                                             \
-		}                                                             \
+#define TEST(expr)                                       \
+	do {                                                 \
+		if (!(expr)) {                                   \
+			std::cerr << "TEST failed: " #expr           \
+					  << "\nFile: " << __FILE__          \
+					  << "\nLine: " << __LINE__ << '\n'; \
+			std::abort();                                \
+		}                                                \
 	} while (false)
 //-------------------------------------------------------------------------------------------------
 template<typename T>
